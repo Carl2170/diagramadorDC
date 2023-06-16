@@ -34,10 +34,7 @@
         <!-- ============================================================== -->
         <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
             <ul class="navbar-nav d-lg-none d-md-block ">
-                <li class="nav-item">
-                    <a class="nav-toggler nav-link waves-effect waves-light text-white "
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                </li>
+             
             </ul>
             <!-- ============================================================== -->
             <!-- toggle and nav items -->
@@ -46,13 +43,11 @@
                 <!-- ============================================================== -->
                 <!-- Search -->
                 <!-- ============================================================== -->
-
-                <li class="nav-item search-box">
-                    <a class="nav-link text-muted" href="javascript:void(0)"><i class="ti-search"></i></a>
-                    <form class="app-search" style="display: none;">
-                        <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
-                            class="srh-btn"><i class="ti-close"></i></a> </form>
+                <li class="nav-item">
+                    <a class="nav-toggler nav-link waves-effect waves-light text-white "
+                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                 </li>
+               
             </ul>
 
             <!-- ============================================================== -->

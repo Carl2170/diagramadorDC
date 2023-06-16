@@ -4,7 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SalaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Controllers\DiagramaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +30,8 @@ Route::post('/update-perfil', [HomeController::class, 'updatePerfil'])->name('up
 
 Route::get('/salas', [SalaController::class, 'index'])->name('salas');
 Route::post('/store',[SalaController::class, 'store'])->name('sala.store');
+
+//VISTA DIAGRAMA DE CLASES
+// Route::get('/diagrama',[DiagramaController::class,'index'])->name('diagrama');
+Route::get('/diagrama',[DiagramaController::class,'index1'])->name('diagrama');
+Route::get('/diagrama2',[DiagramaController::class,'index2'])->name('diagrama');
