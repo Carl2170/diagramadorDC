@@ -19,7 +19,7 @@
                         <option value="agregacion">Agregación</option>
                         <option value="composicion">Composición</option>
                         <option value="herencia">Herencia</option>
-                    </select><br>
+                                        </select><br>
                   </div>
                 </div>
 
@@ -38,13 +38,13 @@
                             <select class="form-select" aria-label="Default select example"
                              id="multiplicidadOrigen"name="multiplicidadOrigen">
                                 <option selected value="">ninguno</option>
-                                <option value="muchos">*</option>
-                                <option value="cero">0</option>
-                                <option value="cero a muchos">0..*</option>
-                                <option value="cero a uno">0..1</option>
-                                <option value="uno">1</option>
-                                <option value="uno a">1..</option>
-                                <option value="uno a muchos">1..*</option>
+                                <option value="*">*</option>
+                                <option value="0">0</option>
+                                <option value="0..*">0..*</option>
+                                <option value="0..1">0..1</option>
+                                <option value="1">1</option>
+                                <option value="1..">1..</option>
+                                <option value="1..*">1..*</option>
                                 <option value="otro">otro</option>
                           </select>
                         
@@ -63,16 +63,21 @@
                             <select class="form-select" aria-label="Default select example"
                              id="multiplicidadDestino"name="multiplicidadDestino">
                                 <option selected value="">ninguno</option>
-                                <option value="muchos">*</option>
-                                <option value="cero">0</option>
-                                <option value="cero a muchos">0..*</option>
-                                <option value="cero a uno">0..1</option>
-                                <option value="uno">1</option>
-                                <option value="uno a">1..</option>
-                                <option value="uno a muchos">1..*</option>
+                                <option value="*">*</option>
+                                <option value="0">0</option>
+                                <option value="0..*">0..*</option>
+                                <option value="0..1">0..1</option>
+                                <option value="1">1</option>
+                                <option value="1..">1..</option>
+                                <option value="1..*">1..*</option>
                                 <option value="otro">otro</option>
                           </select>
                         </div>
+                </div>
+                <br>
+                <div class="row-6">
+                  <strong>Texto de relación</strong>
+                  <input type="text" id="textoRelacion" name="textoRelacion" class="form-control">
                 </div>
             </div>
             <div class="modal-footer">

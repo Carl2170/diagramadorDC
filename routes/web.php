@@ -32,6 +32,8 @@ Route::get('/salas', [SalaController::class, 'index'])->name('salas');
 Route::post('/store',[SalaController::class, 'store'])->name('sala.store');
 
 //VISTA DIAGRAMA DE CLASES
-// Route::get('/diagrama',[DiagramaController::class,'index'])->name('diagrama');
-Route::get('/diagrama',[DiagramaController::class,'index1'])->name('diagrama');
+Route::get('/diagrama',[DiagramaController::class,'index'])->name('diagrama1');
+// Route::get('/diagrama',[DiagramaController::class,'index1'])->name('diagrama');
 Route::get('/diagrama2',[DiagramaController::class,'index2'])->name('diagrama');
+
+Route::get('/diagrama3',[DiagramaController::class,'index3'])->name('diagrama3');

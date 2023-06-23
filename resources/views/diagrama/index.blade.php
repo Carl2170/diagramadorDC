@@ -9,28 +9,32 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h3>vista</h3>
-            <div class="row">
-                {{-- <div class="col-3">
-                    <div id="myPaletteDiv" style="width: 250px;height:900px; 
-                     background-color: #DAE4E4;">
-                    </div>
-               </div>     --}}
-                <div class="col-9">
-                    <div id="myDiagramDiv"
-                     style="max-width: auto; height:900px; 
-                     background-color: #DAE4E4;">
-                     </div>
+            @include('diagrama.modalClase')
+            @include('diagrama.modalRelaciones')
+            @include('diagrama.modalEditAtributos')
+            @include('diagrama.modalEditMetodos')
+            @include('diagrama.modalMultiplicidad')
+
+            <div class="container"><br>
+                <div class="row align-items-center">
+                  <div class="col-1">
+                    <button class="btn btn-success" 
+                    data-bs-toggle="modal" data-bs-target="#agregarClase">
+                    <small>Agregar clase</small>
+                    </button></div>
+                  <div class="col-1">
+                    <a onclick="openModalRelacion();" class="btn btn-primary"><small>Agregar Relación</small></a>        
+                  </div>
                 </div>
-            </div>
-            {{-- <div id="myPaletteDiv"></div>
-            <div id="myDiagramDiv"></div> --}}
+                <br>
+                <div id="myDiagramDiv" style="witdh:300px; height:800px; border:1px solid black;"></div>
+          
+              </div>
         </div>
     </div>
 @endsection
 
 @section('js')
-<script src="{{asset('js/go/go.js')}}"></script>
-<script src="{{asset('js/diagramador/funciones.js')}}"></script>
-
+<script src="{{asset('js/generadorDC/diagrama.js')}}"></script>
+<script src="{{asset('js/generadorDC/funciones.js')}}"></script>
 @endsection

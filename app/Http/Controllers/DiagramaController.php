@@ -8,15 +8,18 @@ use Illuminate\Support\Facades\Storage;
 class DiagramaController extends Controller
 {
     public function index(){
-        $outputFilePath=null;
-        return view('diagrama.index',compact('outputFilePath'));
+        return view('prueba2');
     }
     public function index1(){
         return view('prueba');
     }
 
     public function index2(){
-        return view('prueba2');
+        // return view('prueba2');
+        return view('diagrama.index');
+
     }
-   
+   public function index3(){
+    return view('p');
+   }
 }

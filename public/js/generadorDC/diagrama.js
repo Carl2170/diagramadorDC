@@ -8,17 +8,7 @@ const $ = go.GraphObject.make;
    
 myDiagram =new go.Diagram("myDiagramDiv",
             {
-            // "undoManager.isEnabled": true
-            // layout: (go.GraphObject.make(go.TreeLayout,
-            //     { // this only lays out in trees nodes connected by "generalization" links
-            //       angle: 90,
-            //       path: go.TreeLayout.PathSource,  // links go from child to parent
-            //       setsPortSpot: false,  // keep Spot.AllSides for link connection spot
-            //       setsChildPortSpot: false,  // keep Spot.AllSides
-            //       // nodes not connected by "generalization" links are laid out horizontally
-            //       arrangement: go.TreeLayout.AlignmentNone,
-            //       //ArrangementHorizontal
-            //     }))
+            "undoManager.isEnabled": true,
             layout: $(go.ForceDirectedLayout),
             });
     
@@ -128,13 +118,13 @@ var generalTemplate = $(go.Link,
              
                 $(go.TextBlock,
                 { 
-                  name: "accionRelacion",
+                  name: "textoRelacion",
                   text: "",
                   segmentOffset: new go.Point(0, -10), // Ajusta la posición del TextBlock
                   segmentOrientation: go.Link.OrientUpright, // Orienta el TextBlock verticalmente
                   
                 },
-                new go.Binding("text", "accionRelacion"), // Vincula el texto con la propiedad "multiplicity"
+                new go.Binding("text", "textoRelacion"), // Vincula el texto con la propiedad "multiplicity"
               ),
               $(go.TextBlock,
               { 
@@ -145,17 +135,11 @@ var generalTemplate = $(go.Link,
                 new go.Binding("text", "multiplicidadDestino")
                 )
           );
-  
+
+
   var contextMenu = $(go.Adornment,
   "ContextMenu",
   $(go.Panel, "Vertical",
-    
-    $(go.TextBlock, "Opciones", {
-    margin: 5,
-    background: "lightblue",
-    stroke: "blue",
-    font: "bold 15px sans-serif"
-    }),
 
     $(go.TextBlock, "Multiplicidad", { click: function(e, obj) { editLink(obj.part.adornedPart); },
     margin: 5,
@@ -186,20 +170,47 @@ var compositionTemplate = $(go.Link,
               new go.Binding("fromArrow", "relationship", convertFromArrow)),
             $(go.Shape, { scale: 1.3 , fill: "dark"},
               new go.Binding("toArrow", "relationship", convertToArrow)),
-        );
+              $(go.TextBlock,
+                {
+                  name:"multiplicidadOrigen",
+                  text: "",
+                  segmentIndex: 0, segmentOffset: new go.Point(NaN, NaN),
+                  segmentOrientation: go.Link.OrientUpright // Orienta el TextBlock verticalmente
+                },
+                new go.Binding("text", "multiplicidadOrigen") // Vincula el texto con la propiedad "multiplicity"
+                ),
+             
+                $(go.TextBlock,
+                { 
+                  name: "textoRelacion",
+                  text: "",
+                  segmentOffset: new go.Point(0, -10), // Ajusta la posición del TextBlock
+                  segmentOrientation: go.Link.OrientUpright, // Orienta el TextBlock verticalmente
+                  
+                },
+                new go.Binding("text", "textoRelacion"), // Vincula el texto con la propiedad "multiplicity"
+              ),
+              $(go.TextBlock,
+              { 
+                name: "multiplicidadDestino",
+                text: "",
+                segmentIndex: -1, segmentOffset: new go.Point(NaN, NaN),
+                segmentOrientation: go.Link.OrientUpright },
+                new go.Binding("text", "multiplicidadDestino")
+                )
+              );
 
 compositionTemplate.contextMenu = contextMenu;          
 
 myDiagram.linkTemplateMap.add("generalTemplate" , generalTemplate);
-myDiagram.linkTemplateMap.add("compositionTemplate" , compositionTemplate);
-
-// myDiagram.model.setDataProperty(selectedLink.data, "generalization", generalizationValue);
-// myDiagram.model.setDataProperty(selectedLink.data, "multiplicity", multiplicityValue);
+ myDiagram.linkTemplateMap.add("compositionTemplate" , compositionTemplate);
 
 myDiagram.nodeTemplate =$(go.Node, "Auto",
         {
           fromSpot: go.Spot.AllSides,
           toSpot: go.Spot.AllSides,
+          isShadowed: true,
+          //resizable: true,
           selectionAdornmentTemplate:
             $(go.Adornment, "Spot",
                 $(go.Panel, "Auto",
@@ -212,9 +223,20 @@ myDiagram.nodeTemplate =$(go.Node, "Auto",
             $("ContextMenu",  // that has one button
                 $("ContextMenuButton",
                 
-                $(go.TextBlock, 
-                    {text:"titulo",margin: 3,  font: "14pt monospace"} ),
-                {})
+                $(go.TextBlock,"editar Atributos",
+                    // { click: function(e, obj) { editAtributos(obj.part.adornedPart); },
+                    { click: function(e, obj) { editAtributos(obj.part); }, 
+                    margin: 5,
+                    background: "lightyellow",
+                    font: "bold 15px sans-serif"} ),
+                  ),
+                $("ContextMenuButton",
+                $(go.TextBlock,"editar Métodos",
+                { click: function(e, obj) { editMetodos(obj.part); },
+                   margin: 5,
+                    background: "lightyellow",
+                    font: "bold 15px sans-serif"} ),
+                )
             ) 
         },
         $(go.Shape, { fill: "lightyellow" }),
@@ -279,6 +301,37 @@ myDiagram.addDiagramListener("ViewportBoundsChanged", e => {
             }, null);  // set skipsUndoManager to true, to avoid recording these changes
           });
 
+          nodedata = [
+            {
+              key: "BankAccount",
+              name: "BankAccount",
+              properties: [
+                { name: "owner", type: "String", visibility: "public" },
+                { name: "balance", type: "Currency", visibility: "public", default: "0" }
+              ],
+              methods: [
+                { name: "deposit", parameters: [{ name: "amount", type: "Currency" }], visibility: "public" },
+                { name: "withdraw", parameters: [{ name: "amount", type: "int" }], visibility: "private" }
+              ]
+            },
+            {
+              key: "casa",
+              name: "casa",
+              properties: [
+                { name: "owner", type: "String", visibility: "public" },
+                { name: "balance", type: "Currency", visibility: "public", default: "0" }
+              ],
+              methods: [
+                { name: "deposit", parameters: [{ name: "amount", type: "Currency" }], visibility: "public" },
+                { name: "withdraw", parameters: [{ name: "amount", type: "int" }], visibility: "private" }
+              ]
+            }]
+           
+          linkdata =[
+            {from:"BankAccount", to:"casa", relationship:"", 
+              category:"generalTemplate", multiplicidadOrigen: "1",
+               multiplicidadDestino:"1..*", textoRelacion: "contiene"}
+          ]
 myDiagram.model= new go.GraphLinksModel(
         {
           copiesArrays: true,
@@ -289,7 +342,26 @@ myDiagram.model= new go.GraphLinksModel(
 }
 
   function actualizarNodos(nodo){
-  myDiagram.model.addNodeData(nodo);
+    var nodoExistente =  myDiagram.model.findNodeDataForKey(nodo.key);
+    if(!nodoExistente){
+      myDiagram.model.addNodeData(nodo);
+    }else{
+      actualizarNodeData(nodo.key, nodo)
+    }
+  }
+
+  function actualizarNodeData(nombreNodo, nuevoNodo) {
+    var model = myDiagram.model;
+    var arregloDataArray = model.nodeDataArray;
+    for (let index = 0; index < nodedata.length; index++) {
+      var element = arregloDataArray[index];
+        if(nodedata[index].key ==nombreNodo){
+         nodedata[index].properties = nuevoNodo.properties;
+       break;
+        }
+    }
+    // myDiagram.model.nodeDataArray =arregloDataArray;
+    myDiagram.updateAllTargetBindings();
   }
 
   function devolverClasses(){
@@ -299,19 +371,69 @@ myDiagram.model= new go.GraphLinksModel(
 
   function agregarRelacion(Relacion){
     myDiagram.model.addLinkData(Relacion);
+    myDiagram.updateAllTargetBindings();
   }
 
-  function editLink(obj) {
-    var link = obj.part; // Obtén la referencia al enlace desde el objeto 'part' pasado como argumento
+  function editAtributos(obj){
+    // var link = obj.part; 
+    var node = obj.data;
+    openModalEdicionAtributos(node);
+  }
 
-  // Obtén referencias a los TextBlocks dentro del enlace utilizando los nombres asignados
-  var multiplicidadOrigenTextBlock = link.findObject("multiplicidadOrigen");
-  var accionRelacionTextBlock = link.findObject("accionRelacion");
-  var multiplicidadDestinoTextBlock = link.findObject("multiplicidadDestino");
+  function editMetodos(obj){
+    var node = obj.data;
+    openModalEdicionMetodos(node);
+    console.log(node.methods);
+  }
 
-  // Modifica el texto de los TextBlocks utilizando las referencias obtenidas
-  multiplicidadOrigenTextBlock.text="Carlos";
-  accionRelacionTextBlock.text="Andres"
-  multiplicidadDestinoTextBlock.text="Vargas";
-  
-}
+  function eliminarItemProperties(nombre){
+    var indice=-1
+    var model = myDiagram.model;
+  var arregloDataArray = model.nodeDataArray;
+  var nod = "";
+    for (let index = 0; index < arregloDataArray.length; index++) {
+        if(arregloDataArray[index].key ==nombre){
+       nod = arregloDataArray[index];
+       break;
+        }
+    }
+    var pro = nod.properties;
+    for (let index = 0; index < pro.length; index++) {
+      indice=index;
+     break; 
+    }
+    if (indice !== -1) {
+      pro.splice(indice, 1);
+      nod.properties = pro;
+      myDiagram.model = model;
+      myDiagram.updateAllTargetBindings();
+    }
+
+    console.log(pro);
+    // myDiagram.model.nodeDataArray =arregloDataArray;
+  }
+
+  function editLink(obj){
+    openModalMultiplicidad(obj.data);
+  }
+
+  function actualizarMultiplicidad(cuadroTexto,inputMulOrigen,
+        inputMulDestino, classOrigen, classDestino){
+          var indice=-1
+  var linkData1 = linkdata;
+      
+    for (let index = 0; index < linkData1.length; index++) {
+   
+         console.log(linkData1[index]);
+        if(linkData1[index].from ==classOrigen && linkData1[index].to ==classDestino){
+            indice=index;
+            break;
+        }
+    }
+    linkdata[indice].textoRelacion =cuadroTexto    
+    linkdata[indice].multiplicidadOrigen =inputMulOrigen
+    linkdata[indice].multiplicidadDestino=inputMulDestino
+    myDiagram.updateAllTargetBindings();
+
+  }
+ 

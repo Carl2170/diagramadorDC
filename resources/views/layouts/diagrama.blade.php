@@ -14,6 +14,7 @@
 
     
     <title>@yield('title')</title>
+    
     <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro-lite/" />
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon.png')}}">
@@ -29,12 +30,9 @@
     <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{('css/notify.css')}}"/>
 
-    
-    
-    <!-- Fonts -->
-    
-    <!-- Scripts -->
-    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+    <script src="{{asset('js/go/go.js')}}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
 </head>
 
 <body onload="init()">
@@ -68,7 +66,7 @@
     <!-- Bootstrap tether Core JavaScript -->
 
     {{-- <script src="{{asset('assets/plugins/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script> --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
 
     <script src="{{asset('js/app-style-switcher.js')}}"></script>
     <!--Wave Effects -->
@@ -88,6 +86,9 @@
     {{-- <script src="{{asset('js/pages/dashboards/dashboard1.js')}}"></script> --}}
     <script src="{{asset('js/custom.js')}}"></script>
     {{-- <x:notify-messages /> --}}
+    <script src="{{asset('assets/plugins/jquery/dist/jquery.min.js')}}"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <x-notify::notify />
     @notifyJs
